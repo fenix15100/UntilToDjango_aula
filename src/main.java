@@ -52,7 +52,7 @@ public class main {
 					materia=linevector[3];
 					aula=linevector[4];
 					dia=linevector[5];
-					franja=linevector[6];
+					franja=linevector[6];//
 					System.out.println(line);
 						
 					
