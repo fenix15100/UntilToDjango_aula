@@ -28,37 +28,65 @@ public class main {
 				reader=new BufferedReader(new FileReader(f));
 				String line="";
 				String [] linevector;
+				StringBuffer buffercsv=new StringBuffer();
 				
 				do {
-					String materia="";
-					String profe="";
-					String grupo="";
-					final String mati_tarda="";
-					String nivel="";
-					String curso="";
-					String letra="";
-					String aula="";
-					final String unk2="";
-					String dia="";
-					String franja="";
-					final String unk3="";
+					String comilla2="\"\"";
+					String comilla1="\"";
+					String materia=comilla2;
+					String profe=comilla2;
+					String grupo=comilla2;
+					final String mati_tarda=comilla2;
+					String nivel=comilla2;
+					String curso=comilla2;
+					String letra=comilla2;
+					String aula=comilla2;
+					final String unk2=comilla2;
+					String dia=comilla2;
+					String franja=comilla2;
+					final String unk3=comilla2;
+					
 					
 					
 					
 					line=reader.readLine();
 					linevector=line.split(",");
-					grupo=linevector[1];
-					profe=linevector[2];
-					materia=linevector[3];
-					aula=linevector[4];
-					dia=linevector[5];
-					franja=linevector[6];//
-					System.out.println(line);
+					
+					if(linevector[1]!="")grupo=linevector[1];
+					if(linevector[2]!="")profe=linevector[2];
+					if(linevector[3]!="")materia=linevector[3];
+					if(linevector[4]!="")aula=linevector[4];
+					if(linevector[5]!="")dia=linevector[5];
+					if(linevector[6]!="")franja=linevector[6];
+					
+					
+					if(grupo.contains("ESO")) {
+						nivel=comilla1+"ESO"+comilla1;
+						curso=comilla1+String.valueOf(grupo.charAt(1))+comilla1;
+						letra=comilla1+String.valueOf(grupo.charAt(grupo.length()-2))+comilla1;
+						buffercsv.append(materia+","+profe+","+grupo+","+mati_tarda+","+nivel+","+curso+","+letra+","+aula+","+unk2+","+dia+","+franja+","+unk3+"\n");
 						
+						
+					}else if(grupo.contains("BTX")) {
+						nivel=comilla1+"BTX"+comilla1;
+						curso=comilla1+String.valueOf(grupo.charAt(1))+comilla1;
+						buffercsv.append(materia+","+profe+","+grupo+","+mati_tarda+","+nivel+","+curso+","+letra+","+aula+","+unk2+","+dia+","+franja+","+unk3+"\n");						
+					}else{
+						nivel=grupo;
+						curso=grupo;
+						buffercsv.append(materia+","+profe+","+grupo+","+mati_tarda+","+nivel+","+curso+","+letra+","+aula+","+unk2+","+dia+","+franja+","+unk3+"\n");						
+					}
+					
+					
+					
+					
+					
 					
 					
 					
 				}while(reader.readLine()!=null);
+				
+				System.out.println(buffercsv.toString());
 					
 					
 						
