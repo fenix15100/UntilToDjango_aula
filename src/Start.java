@@ -30,8 +30,8 @@ public class Start {
 				String [] linevector;
 				StringBuffer buffercsv=new StringBuffer();
 				
-				line=reader.readLine();
-				do {
+				
+				while((line=reader.readLine())!=null) {
 					
 					//Inicializo campos del CSV
 					String comilla2="\"\"";
@@ -90,8 +90,7 @@ public class Start {
 					
 					
 						
-					
-				}while(reader.readLine()!=null);
+				}
 				reader.close();
 				
 				//Escribo el buffer en el fichero de salida
