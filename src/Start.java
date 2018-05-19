@@ -1,5 +1,5 @@
 import java.io.BufferedReader;
-import java.io.DataInputStream;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,30 +7,33 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class main {
+public class Start {
 
 	private static Scanner teclado=new Scanner(System.in);
 	private static BufferedReader reader;
 	private static File f;
+	
 	public static void main(String[] args) {
 		
-		System.out.println("Que hacer 1.Convertir csv a formato kronowin 2.Unir dos horarios Kronowin 3.Convertir csvCiclos a formato kronowin(Chapu)");
-		//int op=teclado.nextInt();
-		int op=1;
-		
-		if(op==1) {
-			
+		//Pide el nombre del fichero a convertir
 			System.out.println("Nombre fichero a convertir");
-			//f=new File("horarios/"+teclado.next());
-			f=new File(args[0]);
+			f=new File(teclado.next());
+			
+			int i=0;
 			
 			try {
+				
+				//Leo el fichero linea a linea
+				
 				reader=new BufferedReader(new FileReader(f));
 				String line="";
 				String [] linevector;
 				StringBuffer buffercsv=new StringBuffer();
 				
+				line=reader.readLine();
 				do {
+					
+					//Inicializo campos del CSV
 					String comilla2="\"\"";
 					String comilla1="\"";
 					String materia=comilla2;
@@ -47,9 +50,8 @@ public class main {
 					final String unk3=comilla2;
 					
 					
-					
-					
-					line=reader.readLine();
+				
+					//Leo linea y extraigo campos
 					linevector=line.split(",");
 					
 					if(linevector[1]!="")grupo=linevector[1];
@@ -60,36 +62,44 @@ public class main {
 					if(linevector[6]!="")franja=linevector[6];
 					
 					
-					if(grupo.contains("ESO")) {
-						nivel=comilla1+"ESO"+comilla1;
-						curso=comilla1+String.valueOf(grupo.charAt(1))+comilla1;
+					//Creo campos nuevos a partir del campo grupo
+					
+					if(grupo.contains("SMX")) {
+						nivel=comilla1+"SMX"+comilla1;
+						curso=comilla1+String.valueOf(grupo.charAt(grupo.length()-3))+comilla1;
 						letra=comilla1+String.valueOf(grupo.charAt(grupo.length()-2))+comilla1;
-						buffercsv.append(materia+","+profe+","+grupo+","+mati_tarda+","+nivel+","+curso+","+letra+","+aula+","+unk2+","+dia+","+franja+","+unk3+"\n");
-						
-						
-					}else if(grupo.contains("BTX")) {
-						nivel=comilla1+"BTX"+comilla1;
-						curso=comilla1+String.valueOf(grupo.charAt(1))+comilla1;
-						buffercsv.append(materia+","+profe+","+grupo+","+mati_tarda+","+nivel+","+curso+","+letra+","+aula+","+unk2+","+dia+","+franja+","+unk3+"\n");						
+							
+					}else if(grupo.contains("DAW")) {
+						nivel=comilla1+"DAW"+comilla1;
+						curso=comilla1+String.valueOf(grupo.charAt(grupo.length()-3))+comilla1;
+					}else if(grupo.contains("ASIX")) {
+					nivel=comilla1+"ASIX"+comilla1;
+					curso=comilla1+String.valueOf(grupo.charAt(grupo.length()-3))+comilla1;
+					
 					}else{
 						nivel=grupo;
 						curso=grupo;
-						buffercsv.append(materia+","+profe+","+grupo+","+mati_tarda+","+nivel+","+curso+","+letra+","+aula+","+unk2+","+dia+","+franja+","+unk3+"\n");						
 					}
 					
+					//Monto los campos en el orden correcto dentro de un buffer
+					buffercsv.append(materia+","+profe+","+grupo+","+mati_tarda+","+nivel+","+curso+","+letra+","+aula+","+unk2+","+comilla1+dia+comilla1+","+comilla1+franja+comilla1+","+unk3+"\n");
 					
+					System.out.println(grupo+"index:"+i);
+					i++;
 					
-					
-					
-					
-					
-					
-				}while(reader.readLine()!=null);
-				
-				System.out.println(buffercsv.toString());
 					
 					
 						
+					
+				}while(reader.readLine()!=null);
+				reader.close();
+				
+				//Escribo el buffer en el fichero de salida
+				BufferedWriter writer=new BufferedWriter(new FileWriter("output.csv"));
+				writer.write(buffercsv.toString());
+				writer.close();
+				
+							
 				
 			} catch (FileNotFoundException e) {
 				System.err.println(e.getMessage());
@@ -97,22 +107,7 @@ public class main {
 				System.err.println(e.getMessage());
 			}
 			
-			
-			
-			
-			
-		}else if(op==2) {
-			
-		}else if(op==3) {
-			
-		}
-		else {
-			System.out.println("Opcion no valida");
-			System.exit(0);
-		}
-		
-		
-		
+				
 
 	}
 
