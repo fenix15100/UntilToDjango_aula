@@ -71,10 +71,10 @@ public class Start {
 							
 					}else if(grupo.contains("DAW")) {
 						nivel=comilla1+"DAW"+comilla1;
-						curso=comilla1+String.valueOf(grupo.charAt(grupo.length()-3))+comilla1;
+						curso=comilla1+String.valueOf(grupo.charAt(grupo.length()-2))+comilla1;
 					}else if(grupo.contains("ASIX")) {
 					nivel=comilla1+"ASIX"+comilla1;
-					curso=comilla1+String.valueOf(grupo.charAt(grupo.length()-3))+comilla1;
+					curso=comilla1+String.valueOf(grupo.charAt(grupo.length()-2))+comilla1;
 					
 					}else{
 						nivel=grupo;
