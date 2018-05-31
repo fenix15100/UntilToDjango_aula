@@ -63,6 +63,12 @@ public class Start {
 					
 					
 					//Creo campos nuevos a partir del campo grupo
+					//Solo se ha contemplado los Ciclos de informatica ya que el origen de datos que nos han dado
+					//No era correcto, ya que Domingo nos explico que tuvieron muchos problemas para generarlos
+					//Y que este año si lo harian bien.
+					//Lo unico Salvable eran los horarios de Ciclos pero no pasa nada ya que este script es solo
+					//para pasar del paso, lo importante es que en la wiki dejamos claro cual es el input de datos que
+					//Acepta DjangoAula y solo es cuestion de crear un script que se adapte a ese formato
 					
 					if(grupo.contains("SMX")) {
 						nivel=comilla1+"SMX"+comilla1;
